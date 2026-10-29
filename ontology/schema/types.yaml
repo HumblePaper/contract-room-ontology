@@ -1,0 +1,314 @@
+# Entity types. Common attributes (id, type, name, aliases, summary, facets,
+# relations, sources, status, revised, confidence) are added by the validator.
+
+# 4.1 Work
+workflow:
+  attributes:
+    rhythm: { type: string }
+    skill_measured: { type: string }
+    failure_modes: { type: 'string[]' }
+  sections: [What it is, How it runs, What good looks like, Where it fails, Matter types that use it]
+  min_body_chars: 1200
+matter-type:
+  attributes:
+    cadence: { type: enum, values: [always-on, project, cadence] }
+    trigger: { type: string }
+    owner_function: { type: id, ref: [function] }
+    documents_in_play: { type: 'id[]', ref: [document-type] }
+  sections: [Overview, Stages, Documents, Who is involved, Deadlines, Pitfalls, Metrics, By industry, By jurisdiction]
+  min_body_chars: 1200
+stage:
+  attributes:
+    order: { type: number }
+    entry_condition: { type: string }
+    exit_condition: { type: string }
+    typical_duration: { type: string }
+  sections: [What happens, Inputs and outputs, Decisions taken, Exit criteria]
+  min_body_chars: 600
+task:
+  attributes:
+    inputs: { type: 'string[]' }
+    outputs: { type: 'string[]' }
+    skill_required: { type: string }
+    automatable: { type: enum, values: [yes, partly, no] }
+  sections: [Procedure, Inputs, Outputs, Quality checks, Common errors]
+  min_body_chars: 600
+work-product:
+  attributes:
+    format: { type: string }
+    audience: { type: string }
+    lifecycle: { type: string }
+  sections: [What it contains, Who reads it, Standard of quality, Example structure]
+  min_body_chars: 600
+deadline:
+  attributes:
+    kind: { type: enum, values: [notice, cure, filing, limitation, election, option] }
+    period: { type: string }
+    counting_rule: { type: string }
+    consequence_of_miss: { type: string }
+  sections: [Trigger, Counting, Consequence, Extensions and waivers, By jurisdiction]
+  min_body_chars: 600
+triggering-event:
+  attributes:
+    kind: { type: string }
+  sections: [Definition, What it triggers, Evidence of occurrence]
+  min_body_chars: 400
+
+# 4.2 Deals
+deal-type:
+  attributes:
+    structures: { type: 'id[]', ref: [deal-structure] }
+    document_set: { type: 'id[]', ref: [document-type] }
+    typical_duration: { type: string }
+    typical_value_range: { type: string }
+  sections: [Overview, Structure choices, Lifecycle, Document set, Parties and advisers, Economics, Where it goes wrong, By jurisdiction, By industry]
+  min_body_chars: 1200
+deal-structure:
+  attributes:
+    trade_offs: { type: 'string[]' }
+  sections: [What it is, When chosen, Consequences, Tax and regulatory notes, By jurisdiction]
+  min_body_chars: 600
+party-role:
+  attributes:
+    typical_interests: { type: 'string[]' }
+  sections: [Interests, Typical positions, Leverage]
+  min_body_chars: 400
+
+# 4.3 Documents
+document-type:
+  attributes:
+    purpose: { type: string }
+    binding: { type: enum, values: [yes, no, partly] }
+    typical_parts: { type: 'id[]', ref: [document-part] }
+    lifecycle: { type: string }
+  sections: [Purpose, Anatomy, Clauses it carries, How it is negotiated, Signing and after, By jurisdiction, By industry]
+  min_body_chars: 1200
+model-form:
+  attributes:
+    publisher: { type: string }
+    version: { type: string }
+    year: { type: number }
+    jurisdictions: { type: 'id[]', ref: [jurisdiction] }
+    licence: { type: string }
+  sections: [What it is, Structure, Market acceptance, Known departures, Versions]
+  min_body_chars: 1200
+document-part:
+  attributes: {}
+  sections: [Role in the document, Drafting conventions]
+  min_body_chars: 400
+clause:
+  attributes:
+    protects: { type: 'id[]', ref: [party-role] }
+    variants: { type: 'string[]' }
+    heat: { type: enum, values: [low, medium, high] }
+  sections: [Purpose, How it operates, Positions, Negotiating it, Pitfalls, Interactions, Model language pointer, By jurisdiction, By industry]
+  min_body_chars: 1200
+position:
+  attributes:
+    strength: { type: enum, values: [opening, middle, floor], required: true }
+    favours: { type: 'id[]', ref: [party-role] }
+    market_frequency: { type: string }
+  sections: [Statement, Rationale, When it holds, What it costs, Fallback from and to]
+  min_body_chars: 600
+fallback-sequence:
+  attributes:
+    positions: { type: 'id[]', ref: [position] }
+  sections: [The sequence, Triggers to move, Approval needed at each step]
+  min_body_chars: 600
+defined-term:
+  attributes:
+    standard_definitions: { type: 'string[]' }
+  sections: [Standard definition, Variants, Traps, Where it matters]
+  min_body_chars: 1200
+concept:
+  attributes: {}
+  sections: [Definition, Why it matters at the table, How clauses implement it, By jurisdiction]
+  min_body_chars: 1200
+
+# 4.4 Negotiation craft
+issue:
+  attributes:
+    clause: { type: id, ref: [clause] }
+    sides: { type: 'string[]' }
+  sections: [The gap, Each side's case, Usual landing, Trades]
+  min_body_chars: 600
+argument:
+  attributes:
+    kind: { type: enum, values: [market, risk-allocation, precedent, regulatory, operational] }
+    supports: { type: id, ref: [position] }
+  sections: [The argument, When it works, Counter]
+  min_body_chars: 600
+tactic:
+  attributes:
+    counters: { type: 'id[]', ref: [tactic] }
+  sections: [The move, When to use, How to counter, Ethics and limits]
+  min_body_chars: 600
+pitfall:
+  attributes:
+    occurs_in: { type: 'id[]', ref: [workflow, clause, document-type, stage] }
+    detected_by: { type: 'id[]', ref: [task] }
+    severity: { type: enum, values: [low, medium, high] }
+  sections: [The pattern, How it happens, How to detect it, How to fix it]
+  min_body_chars: 1200
+market-practice:
+  attributes:
+    position: { type: id, ref: [position] }
+    segment: { type: string }
+    industry: { type: id, ref: [industry] }
+    jurisdiction: { type: id, ref: [jurisdiction] }
+    year: { type: number, required: true }
+    basis: { type: enum, values: [survey, filings, practitioner-consensus] }
+    frequency: { type: string }
+  sections: [Claim, Basis, Trend, Caveats]
+  min_body_chars: 600
+precedent:
+  attributes:
+    kind: { type: enum, values: [decision, filing, form] }
+    citation: { type: string }
+    year: { type: number }
+    court_or_registry: { type: string }
+  sections: [Facts, Holding or term, What it changes, Where it applies]
+  min_body_chars: 600
+
+# 4.5 Organisation (generic)
+function:
+  attributes: {}
+  sections: [Remit, Deal-making role, Interfaces]
+  min_body_chars: 400
+role:
+  attributes:
+    function: { type: id, ref: [function] }
+    seniority: { type: string }
+  sections: [What the role owns, Decisions it takes, Career path, Metrics]
+  min_body_chars: 1200
+counterparty:
+  attributes: {}
+  sections: [How they negotiate, Typical positions, What moves them]
+  min_body_chars: 1200
+approval-authority:
+  attributes:
+    thresholds: { type: 'object[]' }
+  sections: [Thresholds, Escalation path, Evidence of approval]
+  min_body_chars: 600
+operating-model:
+  attributes: {}
+  sections: [The model, Fit by segment, Strengths, Failure modes]
+  min_body_chars: 1200
+org-structure:
+  attributes:
+    typical_segment: { type: string }
+    headcount_band: { type: string }
+  sections: [The structure, Who reports to whom, Which matter types it handles well, Failure modes]
+  min_body_chars: 1200
+metric:
+  attributes:
+    unit: { type: string }
+    benchmark_ranges: { type: 'object[]' }
+  sections: [Definition, How to measure, Benchmarks, What moves it]
+  min_body_chars: 600
+
+# 4.6 Context
+jurisdiction:
+  attributes:
+    kind: { type: enum, values: [state, country, union] }
+  sections: [Overview for deal makers, Key statutes, Courts and regulators, Market conventions]
+  min_body_chars: 1200
+statute:
+  attributes:
+    jurisdiction: { type: id, ref: [jurisdiction] }
+    citation: { type: string }
+    in_force_since: { type: string }
+  sections: [What it does, Where it bites in deals, Deadlines it sets]
+  min_body_chars: 600
+regulator:
+  attributes:
+    jurisdiction: { type: id, ref: [jurisdiction] }
+  sections: [Remit, Filings, Timelines]
+  min_body_chars: 600
+industry:
+  attributes: {}
+  sections: [Deal landscape, Documents and forms, Clauses that matter, Matter types]
+  min_body_chars: 1200
+risk:
+  attributes:
+    severity: { type: enum, values: [low, medium, high] }
+  sections: [The exposure, Where it arises, Mitigations]
+  min_body_chars: 600
+tool:
+  attributes:
+    kind: { type: enum, values: [category, product] }
+    vendor: { type: string }
+    category: { type: string }
+  sections: [What it does, Where it fits, Evaluation criteria, Ranking pointer]
+  min_body_chars: 1200
+standard:
+  attributes:
+    body: { type: string }
+  sections: [What it is, Where it appears in contracts, Evidence]
+  min_body_chars: 600
+source:
+  attributes:
+    kind: { type: enum, values: [statute, form, decision, survey, filing, press-release, website, other] }
+    url: { type: string }
+    publisher: { type: string }
+    date: { type: string }
+  sections: [Citation, What it establishes]
+  min_body_chars: 400
+
+# 4.7 Market layer
+organisation:
+  market: true
+  attributes:
+    kind: { type: string }
+    industry: { type: id, ref: [industry] }
+    segment: { type: string }
+    hq: { type: string }
+    jurisdictions: { type: 'id[]', ref: [jurisdiction] }
+    listing: { type: enum, values: [public, private] }
+    size_band: { type: string }
+    website: { type: string }
+  # Profile is the one required section. A market organisation adds Deal activity, How it contracts, Teams, People and
+  # Deals; a vendor, a law firm or an association adds What it sells, Funding and ownership or Membership as it has them.
+  sections: [Profile]
+  min_body_chars: 300
+team:
+  market: true
+  attributes:
+    organisation: { type: id, ref: [organisation], required: true }
+    reporting_line: { type: string }
+    headcount_band: { type: string }
+    scope: { type: string }
+    org_structure: { type: id, ref: [org-structure] }
+    panel: { type: 'id[]', ref: [organisation] }
+  sections: [How the team is organised, Who leads it, What it handles, Public deals]
+  min_body_chars: 300
+person:
+  market: true
+  attributes:
+    current_role: { type: id, ref: [role], required: true }
+    current_organisation: { type: id, ref: [organisation], required: true }
+    history: { type: 'object[]' }
+    admissions: { type: 'id[]', ref: [jurisdiction] }
+    education: { type: 'string[]' }
+    claimed: { type: boolean }
+    current_role_source: { type: id, ref: [source] }
+    current_organisation_source: { type: id, ref: [source] }
+    admissions_source: { type: id, ref: [source] }
+    education_source: { type: id, ref: [source] }
+  sections: [Current role, Career path, Public deals, Admissions and education]
+  min_body_chars: 300
+deal:
+  market: true
+  attributes:
+    date: { type: string }
+    value: { type: number }
+    currency: { type: string }
+    deal_type: { type: id, ref: [deal-type] }
+    structure: { type: id, ref: [deal-structure] }
+    parties: { type: 'object[]' }
+    advisers: { type: 'object[]' }
+    governing_law: { type: id, ref: [jurisdiction] }
+    documents: { type: 'object[]' }
+    notable_terms: { type: 'string[]' }
+  sections: [Summary, Parties and advisers, Structure, Notable terms, Documents, People]
+  min_body_chars: 300

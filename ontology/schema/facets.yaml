@@ -1,0 +1,7 @@
+jurisdiction: [delaware, new-york, california, texas, us-federal, england-and-wales, eu, india, singapore, uae, australia, canada, germany, france]
+industry: [saas, enterprise-software, oil-and-gas, funds-and-credit, banking-and-nbfc-lending, real-estate, construction, life-sciences, manufacturing, retail, media, public-sector]
+party_perspective: [customer, vendor, borrower, lender, buyer, seller, licensor, licensee, landlord, tenant, investor, company]
+segment: [startup, growth, mid-market, enterprise, public-company]
+reader: [negotiating-counsel, deal-principal, function-leader]
+# The desk a piece files under: one per piece, the shelf a deal maker would look on, not the outlet's beat.
+desk: [legal-ai, contract-negotiation, in-house-teams, vendors-and-funding, law-firms, courts-and-regulation]

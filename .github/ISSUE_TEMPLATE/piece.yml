@@ -1,0 +1,12 @@
+name: Suggest a piece
+description: An article, report, filing or podcast about legal tech or contracting that the wire should carry
+labels: [piece]
+body:
+  - type: input
+    id: url
+    attributes: { label: URL, description: The page itself, not a homepage }
+    validations: { required: true }
+  - type: textarea
+    id: why
+    attributes: { label: Why it matters to a deal maker, description: Two sentences at most }
+    validations: { required: true }

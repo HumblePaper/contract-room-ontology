@@ -1,0 +1,24 @@
+guide: {}
+how-to: { block: { steps: { type: 'object[]', required: true }, agent_capable: { type: boolean } } }
+explainer: {}
+model-language: { block: { language: { type: 'object[]', required: true } } }
+comparison: { block: { columns: { type: 'string[]', required: true }, rows: { type: 'object[]', required: true } } }
+ranking: { needs_year: true, block: { criteria: { type: 'object[]', required: true }, scores: { type: 'object[]', required: true }, year: { type: number, required: true } } }
+checklist: { block: { items: { type: 'object[]', required: true } } }
+matrix: { block: { axes: { type: 'object[]', required: true }, cells: { type: 'object[]', required: true } } }
+market-report: { needs_year: true, dated_url: true, block: { year: { type: number, required: true }, segment: { type: string }, claims: { type: 'object[]', required: true } } }
+precedent-note: {}
+note: { dated_url: true }
+update: { dated_url: true, block: { affects: { type: 'id[]', required: true } } }
+calculator: { block: { calculator: { type: string, required: true }, parameters: { type: 'object[]' } } }
+question: { block: { question: { type: string, required: true }, answer: { type: string, required: true } } }
+reading-list: { block: { items: { type: 'object[]', required: true } }, item: { source: { type: id, ref: [source], required: true }, title: { type: string }, url: { type: string }, note: { type: string, required: true } } }
+timeline: {}
+organisation-profile: {}
+team-profile: {}
+person-profile: {}
+deal-page: {}
+league-table: { needs_year: true, block: { criteria: { type: 'object[]', required: true }, rows: { type: 'object[]', required: true }, period: { type: string, required: true } } }
+career-path: {}
+org-chart: {}
+piece: { dated_url: true, block: { url: { type: string, required: true }, outlet: { type: string, required: true }, author: { type: string }, kind: { type: enum, values: [news, analysis, research, guidance, vendor, post, decision, filing, podcast], required: true }, paywall: { type: enum, values: [none, registration, paywall] }, language: { type: string } } }

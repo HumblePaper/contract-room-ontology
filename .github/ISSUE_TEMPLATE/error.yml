@@ -1,0 +1,16 @@
+name: Report an error
+description: A fact on a reference page is wrong or out of date
+labels: [error]
+body:
+  - type: input
+    id: page
+    attributes: { label: Page URL, description: The reference page with the error }
+    validations: { required: true }
+  - type: textarea
+    id: wrong
+    attributes: { label: What is wrong, description: Quote the sentence and say what it should say }
+    validations: { required: true }
+  - type: input
+    id: source
+    attributes: { label: Source that shows it, description: A public page that says the correct thing }
+    validations: { required: true }

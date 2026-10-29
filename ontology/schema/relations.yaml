@@ -1,0 +1,72 @@
+# 5.1 Structure and composition
+uses_workflow: { domain: [matter-type], range: [workflow], inverse: workflow_of }
+has_stage: { domain: [matter-type, deal-type], range: [stage], inverse: stage_of, ordered: true }
+comprises: { domain: [stage], range: [task], inverse: task_in }
+produces: { domain: [task], range: [work-product], inverse: produced_by }
+consumes: { domain: [task], range: [work-product, document-type], inverse: consumed_by }
+has_part: { domain: [document-type], range: [document-part], inverse: part_of }
+contains_clause: { domain: [document-type, document-part], range: [clause], inverse: appears_in, fields: [strength] }
+instantiates: { domain: [model-form], range: [document-type], inverse: instantiated_by }
+published_by: { domain: [model-form], range: [source, organisation], inverse: publishes }
+admits_structure: { domain: [deal-type], range: [deal-structure], inverse: structure_of }
+requires_document: { domain: [deal-type], range: [document-type], inverse: required_by }
+involves: { domain: [deal-type], range: [party-role], inverse: involved_in }
+
+# 5.2 Negotiation
+has_position: { domain: [clause], range: [position], inverse: position_of }
+falls_back_to: { domain: [position], range: [position], inverse: fallback_from, ordered: true }
+sequence_for: { domain: [fallback-sequence], range: [clause], inverse: has_sequence }
+favours: { domain: [position], range: [party-role], inverse: favoured_by }
+raises: { domain: [clause], range: [issue], inverse: issue_of }
+argued_by: { domain: [issue], range: [argument], inverse: argues }
+supports: { domain: [argument], range: [position], inverse: supported_by }
+applies_to: { domain: [tactic], range: [issue, clause], inverse: tactic_for }
+countered_by: { domain: [tactic], range: [tactic], inverse: counters }
+occurs_in: { domain: [pitfall], range: [workflow, clause, document-type, stage], inverse: has_pitfall }
+detected_by: { domain: [pitfall], range: [task], inverse: detects }
+measures: { domain: [market-practice], range: [position], inverse: measured_by }
+illustrates: { domain: [precedent], range: [clause, position, pitfall, concept, deal-structure], inverse: illustrated_by }
+
+# 5.3 Meaning
+implements: { domain: [clause], range: [concept], inverse: implemented_by }
+defines: { domain: [defined-term], range: [concept], inverse: defined_by }
+used_by: { domain: [defined-term], range: [clause, document-type], inverse: uses_term }
+interacts_with: { domain: [clause], range: [clause], inverse: interacts_with, fields: [note] }
+governed_by: { domain: [concept, clause, deadline], range: [statute], inverse: governs }
+set_by: { domain: [deadline], range: [statute, clause], inverse: sets_deadline }
+triggered_by: { domain: [deadline, stage], range: [triggering-event], inverse: triggers }
+
+# 5.4 Organisation
+belongs_to: { domain: [role], range: [function], inverse: has_role }
+owns: { domain: [role], range: [matter-type, task], inverse: owned_by }
+approves: { domain: [role], range: [position, deal-structure], inverse: approved_by, fields: [approval-authority] }
+typically_takes: { domain: [counterparty], range: [position], inverse: taken_by }
+appears_in: { domain: [counterparty], range: [matter-type], inverse: has_counterparty }
+includes_tool: { domain: [operating-model], range: [tool], inverse: included_in }
+metric_for: { domain: [metric], range: [workflow, matter-type, function, team], inverse: measured_by }
+mitigated_by: { domain: [risk], range: [clause, task], inverse: mitigates }
+arises_from: { domain: [risk], range: [pitfall, clause, deadline], inverse: gives_rise_to }
+follows: { domain: [org-structure], range: [operating-model], inverse: followed_by }
+
+# 5.5 Context
+specific_to: { domain: ['*'], range: [jurisdiction, industry], inverse: has_specific }
+administers: { domain: [regulator], range: [statute], inverse: administered_by }
+evidenced_by: { domain: [standard], range: [document-type], inverse: evidences }
+supports_workflow: { domain: [tool], range: [workflow, task], inverse: supported_by }
+cites: { domain: ['*'], range: [source], inverse: cited_by }
+
+# 5.6 Market layer
+holds: { domain: [person], range: [role], inverse: held_by, fields: [from, until, capacity] }
+member_of: { domain: [person], range: [team], inverse: has_member }
+leads: { domain: [person], range: [team], inverse: led_by }
+part_of: { domain: [team], range: [organisation], inverse: has_team }
+structured_as: { domain: [team], range: [org-structure], inverse: structure_of }
+has_party: { domain: [deal], range: [organisation], inverse: party_to, fields: [party_role] }
+advised_by: { domain: [deal], range: [organisation], inverse: advised, fields: [capacity] }
+worked_on: { domain: [person], range: [deal], inverse: worked_by, fields: [capacity] }
+instance_of: { domain: [deal], range: [deal-type], inverse: has_instance }
+used_form: { domain: [deal], range: [model-form], inverse: used_in }
+exhibits: { domain: [deal], range: [position], inverse: exhibited_in }
+governed_by_law: { domain: [deal], range: [jurisdiction], inverse: governs_deal }
+operates_in: { domain: [organisation], range: [industry, jurisdiction], inverse: has_operator }
+panel_counsel: { domain: [organisation], range: [organisation], inverse: panel_for }

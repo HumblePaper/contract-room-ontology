@@ -1,0 +1,22 @@
+name: check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - run: npm run readme:check
+      - name: citations for changed pieces and sources
+        if: github.event_name == 'pull_request'
+        run: |
+          for f in $(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD -- 'ontology/content/piece/*.md' 'ontology/entries/source/*.md'); do
+            id=$(echo "$f" | sed -E 's#ontology/(content|entries)/##; s#\.md$##')
+            npm run -s citations -- --only "$id"
+          done

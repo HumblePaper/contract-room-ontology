@@ -1,0 +1,16 @@
+name: Suggest an organisation
+description: A company, law firm, vendor or association that the market layer should list
+labels: [organisation]
+body:
+  - type: input
+    id: website
+    attributes: { label: Website, description: The organisation's own site }
+    validations: { required: true }
+  - type: textarea
+    id: sells
+    attributes: { label: What it sells, description: One or two plain sentences }
+    validations: { required: true }
+  - type: input
+    id: source
+    attributes: { label: One public source, description: A filing, a news report or a page that describes it }
+    validations: { required: true }

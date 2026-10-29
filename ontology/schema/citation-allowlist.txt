@@ -1,0 +1,41 @@
+# Source URLs that a script cannot fetch (paywalls, bot walls). One URL per line.
+# Each URL must match a source entry's `url` exactly. Allowlisted sources are
+# reported as "skipped (allowlisted)" and are never errors. They still need the
+# second check: a reviewer reading the cited page by hand.
+
+# acc.com sits behind a bot wall (403 "Checking connection")
+https://www.acc.com/resource-library/2023-chief-legal-officers-survey
+
+# legislation.gov.uk answers 202 with a challenge page to scripted fetches; re-check by hand quarterly
+https://www.legislation.gov.uk/ukpga/1977/50
+
+# indiacode.nic.in times out for scripted fetches; re-check by hand quarterly
+https://www.indiacode.nic.in/handle/123456789/2187
+
+# about.att.com answers 403 to scripted fetches; confirmed through search copies and trade reports
+https://about.att.com/story/2026/att-legaledge.html
+
+# americanbar.org answers 403 to scripted fetches; content cited through The Bar Examiner's analysis
+https://www.americanbar.org/content/dam/aba/administrative/professional_responsibility/ethics-opinions/aba-formal-opinion-512.pdf
+
+# itdaily.com refuses scripted fetches; page read by hand through a browsing fetch on 2026-10-15
+https://itdaily.com/news/business/wolters-kluwer-brings-ai-powered-document-formatting-to-libra-workspace/
+
+# techafricanews.com refuses scripted fetches; page read by hand through a browsing fetch on 2026-10-15
+https://techafricanews.com/?p=89118
+
+# lexisnexis.com sends response headers too large for scripted fetches (header overflow); page read by hand with curl on 2026-10-15
+https://www.lexisnexis.com/en-us/about-us/about-us.page
+# clio.com answers 403 with a challenge page to scripted fetches; page read by hand in a browser on 2026-10-15
+https://www.clio.com/about/
+
+# openai.com answers 403 to scripted fetches; pages read by hand in a browser on 2026-10-15
+https://openai.com/our-structure/
+https://openai.com/policies/row-privacy-policy/
+
+# legaltechnology.com answers scripted fetches with a bot-verification page; pages read by hand on 2026-10-15
+https://legaltechnology.com/2026/03/10/legora-raises-550m-series-d-at-5-55bn-valuation-interview-with-founder-max-junestrand/
+https://legaltechnology.com/breaking-news-imanage-receives-substantial-minority-investment-from-bain-capital-tech-opportunities/
+
+# sec.gov refuses fetches without a declared contact in the user agent; page read with one on 2026-10-15
+https://www.sec.gov/Archives/edgar/data/1108524/000110852426000056/crm-q4fy26xexhibit991.htm
