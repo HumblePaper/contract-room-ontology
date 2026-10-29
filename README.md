@@ -8,11 +8,11 @@
 
 Sponsored by [Humblepaper](https://humblepaper.co).
 
-An open, cited ontology of commercial deal-making: the clauses, positions, fallbacks,
-documents, workflows, organisations and deals that commercial contract negotiation runs on.
-Every file here is one node, written in Markdown with YAML frontmatter and cited to a public
-source. The rendered reference is at https://thecontractroom.com. The data is free to reuse
-with attribution (CC BY 4.0, see LICENSE-CONTENT.md).
+The Contract Room reference is an open, cited ontology of commercial deal-making: the clauses,
+positions, fallbacks, documents, workflows, organisations and deals that commercial contract
+negotiation runs on. Every file here is one node, written in Markdown with YAML frontmatter and
+cited to a public source. The rendered reference is at https://thecontractroom.com, and the data
+is free to reuse with attribution (CC BY 4.0, see LICENSE-CONTENT.md).
 
 <!-- updated:start -->
 Last updated 2026-10-15
@@ -20,7 +20,7 @@ Last updated 2026-10-15
 
 ## The market layer
 
-Organisations in the reference, each cited to its own filings, pages or reported coverage.
+The organisations in the reference, each cited to its own filings, its own pages or reported coverage.
 
 <!-- market:start -->
 | Organisation | Kind | Headquarters |
@@ -99,9 +99,10 @@ The rolling data release is rebuilt on every merge to main:
 
 ## Contribute
 
-Open any page on thecontractroom.com and use "Edit this entry on GitHub", or open an issue
-with the forms here. One change per pull request. Every fact cites a source. See CONTRIBUTING.md.
+Open any page on thecontractroom.com and use "Edit this entry on GitHub", or open an issue with
+the forms here. One change per pull request, and every fact cites a source. CONTRIBUTING.md has
+the rest.
 
 ## Who maintains this
 
-Humblepaper, Inc. maintains The Contract Room. Vendors are described from public sources only.
+Humblepaper, Inc. maintains The Contract Room. Vendors are described from public sources only, and no entry is paid for.
