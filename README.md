@@ -1,5 +1,13 @@
 # The Contract Room reference
 
+<div align="center">
+<a href="https://humblepaper.co"><img src="https://raw.githubusercontent.com/HumblePaper/.github/main/profile/mark.png" width="56" alt="Humblepaper"></a>
+</div>
+
+[![check](https://github.com/HumblePaper/contract-room-ontology/actions/workflows/check.yml/badge.svg)](https://github.com/HumblePaper/contract-room-ontology/actions/workflows/check.yml) [![publish](https://github.com/HumblePaper/contract-room-ontology/actions/workflows/publish.yml/badge.svg)](https://github.com/HumblePaper/contract-room-ontology/actions/workflows/publish.yml) [![data release](https://img.shields.io/badge/data-rolling%20release-blue)](https://github.com/HumblePaper/contract-room-ontology/releases/tag/data) [![last commit](https://img.shields.io/github/last-commit/HumblePaper/contract-room-ontology)](https://github.com/HumblePaper/contract-room-ontology/commits/main) [![content CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-lightgrey)](LICENSE-CONTENT.md) [![rendered at thecontractroom.com](https://img.shields.io/badge/rendered%20at-thecontractroom.com-0a7)](https://thecontractroom.com)
+
+Sponsored by [Humblepaper](https://humblepaper.co).
+
 An open, cited ontology of commercial deal-making: the clauses, positions, fallbacks,
 documents, workflows, organisations and deals that commercial contract negotiation runs on.
 Every file here is one node, written in Markdown with YAML frontmatter and cited to a public
