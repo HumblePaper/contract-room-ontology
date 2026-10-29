@@ -1,0 +1,40 @@
+name: publish
+on:
+  push:
+    branches: [main]
+concurrency:
+  group: publish
+  cancel-in-progress: false
+jobs:
+  data-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: (cd build && zip -qr jsonld.zip jsonld)
+      - name: rolling data release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view data >/dev/null 2>&1 || gh release create data --title "Data (rolling)" --notes "Rebuilt on every merge to main. CC BY 4.0, attribution: The Contract Room, https://thecontractroom.com" --latest=false
+          gh release upload data build/graph.ttl build/vocab.ttl build/graph.json build/search.json build/jsonld.zip --clobber
+          gh release edit data --notes "Rebuilt from ${{ github.sha }} on $(date -u +%Y-%m-%d). CC BY 4.0, attribution: The Contract Room, https://thecontractroom.com"
+  dispatch:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: tell the site to publish
+        env:
+          DISPATCH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+        run: |
+          curl -sf -X POST -H "Authorization: Bearer $DISPATCH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/vivekdurai/thecontractroom/dispatches \
+            -d '{"event_type":"reference-publish","client_payload":{"sha":"${{ github.sha }}"}}'
