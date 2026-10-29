@@ -5,7 +5,7 @@ import { loadCorpus } from './ontology/corpus';
 import { validate } from './ontology/validate';
 import { styleDiagnostics } from './ontology/style';
 import { buildGraph } from './ontology/build-graph';
-import { searchIndex, redirects, outreachIndex, publicGraph } from './ontology/build-outputs';
+import { searchIndex, redirects, entityIndex, publicGraph } from './ontology/build-outputs';
 import { jsonLd, turtle, vocabTurtle } from './ontology/build-jsonld';
 import { d1Sql } from './ontology/build-d1';
 
@@ -14,7 +14,7 @@ const errors = [...validate(corpus), ...styleDiagnostics(corpus)].filter((d) => 
 if (errors.length) { for (const e of errors) console.error(`ERROR ${e.path}: ${e.message}`); process.exit(1); }
 
 const g = buildGraph(corpus);
-// every public output (graph.json, search.json, outreach-index.json, JSON-LD, Turtle) carries no draft node, item or edge;
+// every public output (graph.json, search.json, entity-index.json, JSON-LD, Turtle) carries no draft node, item or edge;
 // the D1 tables keep drafts for preview hosts
 const pub = publicGraph(g);
 const out = 'build';
@@ -26,7 +26,7 @@ const renames = existsSync('ontology/redirects.yaml') ? (parse(readFileSync('ont
 writeFileSync(join(out, 'graph.json'), JSON.stringify(pub));
 writeFileSync(join(out, 'search.json'), JSON.stringify(searchIndex(g)));
 writeFileSync(join(out, 'redirects.json'), JSON.stringify(redirects(g, renames)));
-writeFileSync(join(out, 'outreach-index.json'), JSON.stringify(outreachIndex(pub), null, 1));
+writeFileSync(join(out, 'entity-index.json'), JSON.stringify(entityIndex(pub), null, 1));
 for (const n of [...pub.nodes.filter((n) => !n.id.includes('#')), ...pub.content]) {
   writeFileSync(join(out, 'jsonld', n.id.replace('/', '__') + '.json'), JSON.stringify(jsonLd(n, pub)));
 }

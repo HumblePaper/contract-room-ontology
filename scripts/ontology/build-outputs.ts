@@ -33,7 +33,7 @@ export function redirects(g: Graph, extra: { from: string; to: string }[]) {
   return out;
 }
 
-export function outreachIndex(g: Graph) {
+export function entityIndex(g: Graph) {
   const edgesFrom = (id: string, rel: string) => g.edges.filter((e) => e.from === id && e.rel === rel).map((e) => e.to);
   const pages: { industry: string | null; role: string | null; matter_type: string | null; url: string; hook: string }[] = [];
   for (const m of g.nodes.filter((n) => n.type === 'matter-type' && !n.id.includes('#'))) {

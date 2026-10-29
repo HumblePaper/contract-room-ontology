@@ -11,7 +11,7 @@ The required sections for each type are in `schema/types.yaml`. Body prose follo
 
 ## Commands
 
-- `npm run check` validates every file against the schema, the relation domains and ranges, the style rules and the denylist. It must end with `0 errors`.
+- `npm run check` validates every file against the schema, the relation domains and ranges and the style rules, and validates against the denylist when `ONTOLOGY_DENYLIST` names one; this public repo ships none. It must end with `0 errors`.
 - `npm run build` builds the graph and its outputs (graph, search index, redirects, JSON-LD and Turtle).
 
 ## The data rule

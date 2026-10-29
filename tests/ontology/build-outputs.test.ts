@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { loadCorpus } from '../../scripts/ontology/corpus';
 import { buildGraph } from '../../scripts/ontology/build-graph';
-import { searchIndex, redirects, outreachIndex, publicGraph } from '../../scripts/ontology/build-outputs';
+import { searchIndex, redirects, entityIndex, publicGraph } from '../../scripts/ontology/build-outputs';
 import { jsonLd, turtle } from '../../scripts/ontology/build-jsonld';
 
 const corpus = loadCorpus('ontology');
@@ -34,8 +34,8 @@ describe('build outputs', () => {
     const r = redirects(g, [{ from: '/clauses/lol', to: '/clauses/limitation-of-liability' }]);
     expect(r).toContainEqual({ from: '/clauses/lol', to: '/clauses/limitation-of-liability' });
   });
-  it('outreach index lists matter types by industry and market rows with public facts only', () => {
-    const o = outreachIndex(g);
+  it('entity index lists matter types by industry and market rows with public facts only', () => {
+    const o = entityIndex(g);
     expect(o.pages.some((p) => p.matter_type === 'matter-type/enterprise-sale-on-customer-paper' && p.industry === 'industry/saas')).toBe(true);
     expect(JSON.stringify(o.market)).not.toMatch(/email|phone/);
   });
@@ -77,16 +77,16 @@ describe('build outputs', () => {
     expect(pub.nodes.length).toBe(g.nodes.filter((n) => n.id.split('#')[0] !== draftId).length);
     expect(pub.edges.length).toBeGreaterThan(0);
   });
-  it('a draft matter type yields no outreach page row and a draft node no Turtle triple naming it', () => {
+  it('a draft matter type yields no entity index page row and a draft node no Turtle triple naming it', () => {
     const draftMatter = 'matter-type/enterprise-sale-on-customer-paper';
     const draftClause = 'clause/indemnity';
     const drafts = new Set([draftMatter, draftClause]);
     const withDraft = { ...g, nodes: g.nodes.map((n) => (drafts.has(n.id.split('#')[0]) ? { ...n, status: 'draft' as const } : n)) };
-    expect(outreachIndex(withDraft).pages.some((p) => p.matter_type === draftMatter)).toBe(true);
+    expect(entityIndex(withDraft).pages.some((p) => p.matter_type === draftMatter)).toBe(true);
     expect(turtle(withDraft)).toContain('<https://thecontractroom.com/clauses/indemnity');
     const pub = publicGraph(withDraft);
-    expect(outreachIndex(pub).pages.some((p) => p.matter_type === draftMatter)).toBe(false);
-    expect(outreachIndex(pub).pages.length).toBeGreaterThan(0);
+    expect(entityIndex(pub).pages.some((p) => p.matter_type === draftMatter)).toBe(false);
+    expect(entityIndex(pub).pages.length).toBeGreaterThan(0);
     const t = turtle(pub);
     expect(t).not.toContain('<https://thecontractroom.com/clauses/indemnity');
     expect(t).not.toContain('<https://thecontractroom.com/matters/enterprise-sale-on-customer-paper');

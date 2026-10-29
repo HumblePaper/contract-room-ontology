@@ -12,7 +12,9 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      # The README is regenerated on main by publish.yml, so a data-only pull request never touches it.
       - run: npm run readme:check
+        if: github.event_name == 'push'
       - name: citations for changed pieces and sources
         if: github.event_name == 'pull_request'
         run: |

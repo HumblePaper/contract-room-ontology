@@ -6,6 +6,10 @@ Every file here is one node, written in Markdown with YAML frontmatter and cited
 source. The rendered reference is at https://thecontractroom.com. The data is free to reuse
 with attribution (CC BY 4.0, see LICENSE-CONTENT.md).
 
+<!-- updated:start -->
+Last updated 2026-10-15
+<!-- updated:end -->
+
 ## The market layer
 
 Organisations in the reference, each cited to its own filings, pages or reported coverage.
@@ -48,32 +52,41 @@ Organisations in the reference, each cited to its own filings, pages or reported
 <!-- outline:start -->
 | Type | Entries |
 |---|---|
-| clause | 2 |
-| concept | 3 |
-| deal-type | 2 |
-| defined-term | 1 |
-| document-type | 2 |
-| fallback-sequence | 1 |
-| function | 1 |
-| industry | 1 |
-| jurisdiction | 3 |
-| matter-type | 1 |
-| model-form | 1 |
-| party-role | 2 |
-| pitfall | 1 |
-| position | 2 |
-| role | 1 |
-| source | 109 |
-| stage | 1 |
-| task | 1 |
-| tool | 1 |
-| work-product | 1 |
-| workflow | 1 |
+| [clause](https://thecontractroom.com/clauses) | 2 |
+| [concept](https://thecontractroom.com/concepts) | 3 |
+| [deal-type](https://thecontractroom.com/deals) | 2 |
+| [defined-term](https://thecontractroom.com/glossary) | 1 |
+| [document-type](https://thecontractroom.com/documents) | 2 |
+| [fallback-sequence](https://thecontractroom.com/fallbacks) | 1 |
+| [function](https://thecontractroom.com/functions) | 1 |
+| [industry](https://thecontractroom.com/industries) | 1 |
+| [jurisdiction](https://thecontractroom.com/jurisdictions) | 3 |
+| [matter-type](https://thecontractroom.com/matters) | 1 |
+| [model-form](https://thecontractroom.com/forms) | 1 |
+| [party-role](https://thecontractroom.com/party-roles) | 2 |
+| [pitfall](https://thecontractroom.com/pitfalls) | 1 |
+| [position](https://thecontractroom.com/positions) | 2 |
+| [role](https://thecontractroom.com/roles) | 1 |
+| [source](https://thecontractroom.com/sources) | 109 |
+| [stage](https://thecontractroom.com/stages) | 1 |
+| [task](https://thecontractroom.com/tasks) | 1 |
+| [tool](https://thecontractroom.com/tools) | 1 |
+| [work-product](https://thecontractroom.com/work-products) | 1 |
+| [workflow](https://thecontractroom.com/workflows) | 1 |
 <!-- outline:end -->
 
 ## Data
 
-- Rolling release: graph.ttl, vocab.ttl, graph.json, search.json and jsonld.zip, rebuilt on every merge.
+The rolling data release is rebuilt on every merge to main:
+
+<!-- data:start -->
+- [graph.ttl](https://github.com/HumblePaper/contract-room-ontology/releases/download/data/graph.ttl)
+- [vocab.ttl](https://github.com/HumblePaper/contract-room-ontology/releases/download/data/vocab.ttl)
+- [graph.json](https://github.com/HumblePaper/contract-room-ontology/releases/download/data/graph.json)
+- [search.json](https://github.com/HumblePaper/contract-room-ontology/releases/download/data/search.json)
+- [jsonld.zip](https://github.com/HumblePaper/contract-room-ontology/releases/download/data/jsonld.zip)
+<!-- data:end -->
+
 - One JSON-LD document per node under build/jsonld after `npm run build`.
 
 ## Contribute

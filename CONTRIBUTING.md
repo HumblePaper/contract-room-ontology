@@ -35,6 +35,7 @@ npm test
 - Make one change per pull request: one entry or one correction. Touch only the lines you are changing.
 - Cite every fact. Each citation is a `source/...` entry that points at the public page that says it. The validator checks that the citation exists. The citation check fetches the page.
 - Follow the voice rules in `docs/voice.md`. Write plain English, lead with the point, and keep to one idea per sentence. The style checker rejects em dashes and unsafe links.
+- Never edit README.md, because it is regenerated on merge.
 - Leave new entity types to the maintainers. A new type needs routes and display code on the site. The validator rejects unknown types.
 - Write a piece as our summary and a link. Do not republish anything from the piece. Do not name a product of ours in a piece.
 
