@@ -8,11 +8,11 @@
 
 Sponsored by [Humblepaper](https://humblepaper.co).
 
-The Contract Room reference is an open, cited ontology of commercial deal-making: the clauses,
-positions, fallbacks, documents, workflows, organisations and deals that commercial contract
-negotiation runs on. Every file here is one node, written in Markdown with YAML frontmatter and
-cited to a public source. The rendered reference is at https://thecontractroom.com, and the data
-is free to reuse with attribution (CC BY 4.0, see LICENSE-CONTENT.md).
+This repository is the source of The Contract Room reference, an open, cited ontology of
+commercial deal-making: the clauses, positions, fallbacks, documents, workflows, organisations
+and deals that negotiation runs on. Every file is one node, written in Markdown with YAML
+frontmatter and cited to a public source. The reference is rendered at https://thecontractroom.com,
+and the data may be reused with attribution under CC BY 4.0 (see LICENSE-CONTENT.md).
 
 <!-- updated:start -->
 Last updated 2026-10-15
@@ -100,8 +100,8 @@ The rolling data release is rebuilt on every merge to main:
 ## Contribute
 
 Open any page on thecontractroom.com and use "Edit this entry on GitHub", or open an issue with
-the forms here. One change per pull request, and every fact cites a source. CONTRIBUTING.md has
-the rest.
+the forms here. One change per pull request, and every fact cites a source. CONTRIBUTING.md sets
+out the rest.
 
 ## Who maintains this
 
