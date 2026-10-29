@@ -2,7 +2,7 @@ import { loadCorpus } from './ontology/corpus';
 import { validate } from './ontology/validate';
 import { styleDiagnostics } from './ontology/style';
 
-const corpus = loadCorpus('ontology');
+const corpus = loadCorpus(process.env.ONTOLOGY_ROOT ?? 'ontology');
 const diags = [...validate(corpus), ...styleDiagnostics(corpus)];
 for (const d of diags) console.log(`${d.level === 'error' ? 'ERROR' : 'warn '} ${d.path}: ${d.message}`);
 const errors = diags.filter((d) => d.level === 'error').length;
